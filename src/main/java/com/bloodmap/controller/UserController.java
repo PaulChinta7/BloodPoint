@@ -3,6 +3,7 @@ package com.bloodmap.controller;
 import com.bloodmap.model.User;
 import com.bloodmap.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/getUserDetails")
-    public List<User> getUserDetails () {
+    public ResponseEntity<List<User>> getUserDetails () {
         return userService.getUserDetails();
     }
 
