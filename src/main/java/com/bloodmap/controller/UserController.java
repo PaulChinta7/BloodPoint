@@ -5,6 +5,7 @@ import com.bloodmap.dataTranferObject.UserResponse;
 import com.bloodmap.model.User;
 import com.bloodmap.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +13,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/bloodMap")
-@AllArgsConstructor
 public class UserController {
-
+   @Autowired
    private UserService userService;
     @GetMapping("/getUserDetails")
     public ResponseEntity<List<UserResponse>> getUserDetails () {
