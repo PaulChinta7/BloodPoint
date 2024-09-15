@@ -1,4 +1,4 @@
-package com.bloodmap.model;
+package com.bloodmap.dataTranferObject;
 
 import lombok.*;
 
