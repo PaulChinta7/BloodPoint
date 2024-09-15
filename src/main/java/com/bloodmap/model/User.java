@@ -1,10 +1,8 @@
 package com.bloodmap.model;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.bloodmap.dataTranferObject.Address;
+import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document (collection = "User")
@@ -12,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User {
     private String id;
     private String username;
@@ -20,5 +19,6 @@ public class User {
     private String phone;
     private String bloodtype;
     private Integer age;
-
+    private String longitude;
+    private String lattitude;
 }

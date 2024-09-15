@@ -1,5 +1,7 @@
 package com.bloodmap.controller;
 
+import com.bloodmap.dataTranferObject.UserRequest;
+import com.bloodmap.dataTranferObject.UserResponse;
 import com.bloodmap.model.User;
 import com.bloodmap.service.UserService;
 import lombok.AllArgsConstructor;
@@ -14,25 +16,18 @@ import java.util.List;
 public class UserController {
 
    private UserService userService;
-
-    @GetMapping("/acceptBloodRequest")
-    public String acceptBloodRequest (){
-        return userService.acceptBloodRequest();
-    }
-
     @GetMapping("/getUserDetails")
-    public ResponseEntity<List<User>> getUserDetails () {
+    public ResponseEntity<List<UserResponse>> getUserDetails () {
         return userService.getUserDetails();
     }
 
     @PostMapping("/addUser")
-    public String addUser (@RequestBody User user) {
-        return userService.addUser(user);
+    public ResponseEntity<Void> addUser (@RequestBody UserRequest userRequest) {
+        return userService.addUser(userRequest);
     }
 
-    @PostMapping("/delete")
-    public String delete (@RequestParam String id) {
-        return userService.delete(id);
+    @PostMapping("/deleteUser")
+    public ResponseEntity<Void> deleteUser (@RequestParam String id) {
+        return userService.deleteUser(id);
     }
-
 }
