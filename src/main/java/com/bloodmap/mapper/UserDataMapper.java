@@ -1,7 +1,9 @@
 package com.bloodmap.mapper;
 
+import com.bloodmap.dataTranferObject.BloodRequestData;
 import com.bloodmap.dataTranferObject.UserRequest;
 import com.bloodmap.dataTranferObject.UserResponse;
+import com.bloodmap.model.BloodRequest;
 import com.bloodmap.model.User;
 import org.springframework.stereotype.Component;
 
@@ -24,5 +26,4 @@ public class UserDataMapper {
                 .bloodtype(userRequest.getBloodtype())
                 .build();
     }
-
 }

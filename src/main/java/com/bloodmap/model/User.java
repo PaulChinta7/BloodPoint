@@ -15,6 +15,7 @@ public class User {
     private String id;
     private String username;
     private String password;
+    private String email;
     private Address address;
     private String phone;
     private String bloodtype;

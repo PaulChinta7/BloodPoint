@@ -15,9 +15,10 @@ import java.util.Date;
 @Builder
 public class BloodRequest {
    private String id;
-   private String requestid;
-   private String acceptid;
+   private String requesterid;
+   private String accepterid;
    private LocalDateTime date;
-   private Integer age;
+   private Integer ageBy;
+   private String requestedBloodType;
    private String message;
 }
