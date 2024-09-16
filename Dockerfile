@@ -1,14 +1,14 @@
 # Stage 1: Build the application
 FROM maven:3.8.6 AS build
 
-# Install OpenJDK 17
-RUN apt-get update && apt-get install -y openjdk-17-jdk
-
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the pom.xml and source code
+# Copy the pom.xml and download dependencies to leverage caching
 COPY pom.xml .
+RUN mvn dependency:go-offline
+
+# Copy the source code
 COPY src ./src
 
 # Package the application
@@ -20,8 +20,8 @@ FROM openjdk:17-jdk-alpine
 # Set the working directory
 WORKDIR /app
 
-# Copy the JAR file from the build stage
-COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.jar /app/myapp.jar
+# Find the correct JAR file by adjusting this line according to the actual name of the JAR file in target
+COPY --from=build /app/target/*.jar /app/myapp.jar
 
 # Expose the port
 EXPOSE 8080
