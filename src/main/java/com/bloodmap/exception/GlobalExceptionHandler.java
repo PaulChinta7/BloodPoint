@@ -27,4 +27,13 @@ public class GlobalExceptionHandler {
                 .build(),HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(BloodRequestNotFoundException.class)
+    @ResponseBody
+    public ResponseEntity<ErrorResponse> handleBloodRequestNotFoundException(BloodRequestNotFoundException exception){
+        return new ResponseEntity<>(ErrorResponse.builder()
+                .message(exception.getMessage())
+                .status(400)
+                .build(),HttpStatus.BAD_REQUEST);
+    }
+
 }

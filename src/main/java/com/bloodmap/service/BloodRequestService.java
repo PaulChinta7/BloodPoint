@@ -1,7 +1,10 @@
 package com.bloodmap.service;
 
+import com.bloodmap.dataTranferObject.BloodAcceptRequest;
+import com.bloodmap.dataTranferObject.BloodAddRequestDTO;
 import com.bloodmap.dataTranferObject.BloodRequestData;
 import com.bloodmap.dataTranferObject.UserResponse;
+import com.bloodmap.exception.BloodRequestNotFoundException;
 import com.bloodmap.mapper.UserDataMapper;
 import com.bloodmap.model.BloodRequest;
 import com.bloodmap.model.User;
@@ -53,4 +56,28 @@ public class BloodRequestService {
         return new ResponseEntity<>(newBloodRequestDetails, HttpStatus.OK);
     }
 
+    public ResponseEntity<Void> addBloodRequest(BloodAddRequestDTO bloodAddRequestDTO) {
+        BloodRequest newBloodRequest=BloodRequest.builder()
+                .requesterid(bloodAddRequestDTO.getRequestorId())
+                .accepterid(null)
+                .date(bloodAddRequestDTO.getRequiredBy())
+                .requestedBloodType(bloodAddRequestDTO.getBloodType())
+                .ageBy(bloodAddRequestDTO.getDonorAgeBy())
+                .message(bloodAddRequestDTO.getMsg())
+                .build();
+        BloodRequest saved_bloodRequest=bloodRequestRepository.save(newBloodRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    public ResponseEntity<Void> acceptBloodRequest(BloodAcceptRequest bloodAcceptRequest) {
+         Optional<BloodRequest> fetched_bloodRequest=bloodRequestRepository.findById(
+                 bloodAcceptRequest.getBloodRequestId());
+         if(fetched_bloodRequest.isEmpty()){
+             throw new BloodRequestNotFoundException("Request Not found in db");
+         }
+         fetched_bloodRequest.get().setAccepterid(bloodAcceptRequest.getAcceptorId());
+         bloodRequestRepository.save(fetched_bloodRequest.get());
+         return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
