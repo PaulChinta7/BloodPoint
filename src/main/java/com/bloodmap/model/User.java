@@ -23,4 +23,3 @@ public class User {
     private String longitude;
     private String lattitude;
 }
-//
